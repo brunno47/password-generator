@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas Seguro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loginScreen" class="auth-screen">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">
+                    <span class="icon">🔐</span>
+                    Bem-vindo
+                </h1>
+                <p class="auth-subtitle">Acesse sua conta para usar o gerador</p>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="loginPassword" required placeholder="Sua senha">
+                        <button type="button" class="toggle-password" data-target="loginPassword">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn primary">
+                    <span>Entrar</span>
+                    <span>→</span>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Não tem uma conta? <a href="#" id="showRegister">Criar conta</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerScreen" class="auth-screen" style="display: none;">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">
+                    <span class="icon">✨</span>
+                    Criar Conta
+                </h1>
+                <p class="auth-subtitle">Registre-se para começar a usar</p>
+            </div>
+
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">Nome</label>
+                    <input type="text" id="registerName" required placeholder="Seu nome" minlength="3">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Senha</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="registerPassword" required placeholder="Mínimo 6 caracteres" minlength="6">
+                        <button type="button" class="toggle-password" data-target="registerPassword">👁️</button>
+                    </div>
+                    <div class="password-strength" id="registerPasswordStrength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Senha</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="registerConfirmPassword" required placeholder="Confirme sua senha">
+                        <button type="button" class="toggle-password" data-target="registerConfirmPassword">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn primary">
+                    <span>Criar Conta</span>
+                    <span>✨</span>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Já tem uma conta? <a href="#" id="showLogin">Fazer login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="generatorScreen" class="container" style="display: none;">
+        <div class="card">
+            <div class="header">
+                <h1 class="title">
+                    <span class="icon">🔐</span>
+                    Gerador de Senhas
+                </h1>
+                <p class="subtitle">Crie senhas seguras e personalizadas</p>
+            </div>
+
+            <div class="user-profile-card">
+                <div class="profile-avatar">
+                    <span id="userInitial">U</span>
+                </div>
+                <div class="profile-info">
+                    <div class="profile-name" id="userNameDisplay">Usuário</div>
+                    <div class="profile-email" id="userEmailDisplay">email@exemplo.com</div>
+                </div>
+                <div class="profile-actions">
+                    <button id="logoutBtn" class="profile-logout-btn" title="Sair">
+                        <span class="logout-icon">🚪</span>
+                        <span class="logout-text">Sair</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="password-display">
+                <input type="text" id="passwordOutput" readonly value="Clique em Gerar Senha">
+                <button id="copyBtn" class="copy-btn" title="Copiar senha">
+                    <span class="copy-icon">📋</span>
+                </button>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="lengthSlider" class="label">
+                        <span>Comprimento: </span>
+                        <span id="lengthValue" class="length-value">16</span>
+                    </label>
+                    <input type="range" id="lengthSlider" min="4" max="64" value="16" class="slider">
+                </div>
+
+                <div class="mode-selector">
+                    <button id="normalMode" class="mode-btn active">Normal</button>
+                    <button id="memorableMode" class="mode-btn">Memorável</button>
+                    <button id="pinMode" class="mode-btn">PIN</button>
+                </div>
+
+                <div class="options">
+                    <label class="option-item">
+                        <input type="checkbox" id="uppercase" checked>
+                        <span class="checkmark"></span>
+                        <span class="option-text">Maiúsculas (A-Z)</span>
+                    </label>
+                    <label class="option-item">
+                        <input type="checkbox" id="lowercase" checked>
+                        <span class="checkmark"></span>
+                        <span class="option-text">Minúsculas (a-z)</span>
+                    </label>
+                    <label class="option-item">
+                        <input type="checkbox" id="numbers" checked>
+                        <span class="checkmark"></span>
+                        <span class="option-text">Números (0-9)</span>
+                    </label>
+                    <label class="option-item">
+                        <input type="checkbox" id="symbols" checked>
+                        <span class="checkmark"></span>
+                        <span class="option-text">Símbolos (!@#$%...)</span>
+                    </label>
+                    <label class="option-item">
+                        <input type="checkbox" id="excludeSimilar">
+                        <span class="checkmark"></span>
+                        <span class="option-text">Excluir similares (0O1lI)</span>
+                    </label>
+                </div>
+
+                <div class="advanced-options">
+                    <label class="option-item">
+                        <input type="checkbox" id="generateMultiple">
+                        <span class="checkmark"></span>
+                        <span class="option-text">Gerar múltiplas senhas</span>
+                    </label>
+                    <div id="multipleCountContainer" class="multiple-count" style="display: none;">
+                        <label for="multipleCount" class="label-small">Quantidade:</label>
+                        <input type="number" id="multipleCount" min="2" max="20" value="5" class="number-input">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="generateBtn" class="generate-btn">
+                        <span class="btn-text">Gerar Senha</span>
+                        <span class="btn-icon">✨</span>
+                    </button>
+                    <button id="refreshBtn" class="refresh-btn" title="Gerar nova senha">
+                        <span>🔄</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="strength-meter">
+                <div class="strength-label">Força da senha:</div>
+                <div class="strength-bar">
+                    <div id="strengthFill" class="strength-fill"></div>
+                </div>
+                <div id="strengthText" class="strength-text">-</div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <span class="stat-label">Entropia:</span>
+                    <span id="entropyValue" class="stat-value">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Tempo estimado:</span>
+                    <span id="crackTime" class="stat-value">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Combinações:</span>
+                    <span id="combinations" class="stat-value">-</span>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="history">Histórico</button>
+                <button class="tab-btn" data-tab="analysis">Análise</button>
+                <button class="tab-btn" data-tab="export">Exportar</button>
+            </div>
+
+            <div class="tab-content active" id="historyTab">
+                <div class="history-list" id="historyList">
+                    <p class="empty-message">Nenhuma senha gerada ainda</p>
+                </div>
+                <button id="clearHistory" class="clear-btn">Limpar Histórico</button>
+            </div>
+
+            <div class="tab-content" id="analysisTab">
+                <div class="analysis-content" id="analysisContent">
+                    <p class="empty-message">Gere uma senha para ver a análise</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="exportTab">
+                <div class="export-options">
+                    <button id="exportTxt" class="export-btn">📄 Exportar TXT</button>
+                    <button id="exportJson" class="export-btn">📦 Exportar JSON</button>
+                    <button id="exportCsv" class="export-btn">📊 Exportar CSV</button>
+                    <button id="importBtn" class="export-btn">📥 Importar</button>
+                    <input type="file" id="importFile" accept=".txt,.json,.csv" style="display: none;">
+                </div>
+            </div>
+        </div>
+
+            <div class="particles"></div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
