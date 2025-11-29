@@ -220,8 +220,7 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 **Seu Nome**
 
-- GitHub: [@seu-usuario](https://github.com/seu-usuario)
-- Email: seu.email@exemplo.com
+- GitHub: [brunno47]([https://github.com/seu-usuario](https://github.com/brunno47))
 
 ## 🙏 Agradecimentos
 
