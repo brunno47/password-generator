@@ -218,7 +218,6 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 ## 👨‍💻 Autor
 
-**Seu Nome**
 
 - GitHub: [brunno47]([https://github.com/seu-usuario](https://github.com/brunno47))
 
